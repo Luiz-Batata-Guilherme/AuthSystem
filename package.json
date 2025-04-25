@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "@elysiajs/swagger": "^1.2.2",
+    "@prisma/client": "^6.6.0",
+    "better-auth": "^1.2.7",
     "elysia": "latest"
   },
   "devDependencies": {
