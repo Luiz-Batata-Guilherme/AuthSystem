@@ -14,16 +14,25 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model User {
-  id       String @id @default(cuid())
-  name     String
-  gender   Gender
-  cpf      String @unique
-  whatsapp Int    @unique
+enum Role {
+  USER
+  ADMIN
 }
 
 enum Gender {
   MALE
   FEMALE
   OTHER
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  gender       Gender   @default(MALE)
+  whatsapp     BigInt   @unique
+  password     String
+  role         Role     @default(USER)
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

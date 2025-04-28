@@ -2,7 +2,7 @@ import { Elysia } from "elysia";
 import { routes } from "./routes/routes";
 import swagger from "@elysiajs/swagger";
 
-const app = new Elysia().listen(3000);
+export const app = new Elysia().listen(3000);
 
 app.use(
   swagger({
@@ -33,13 +33,20 @@ app.use(
   })
 );
 
-app.get("/hello", () => "Hello Elysia!", {
-  detail: {
-    tags: ["App"],
-    summary: "Hello Elysia",
-    description: "Endpoint de teste para verificar se a aplicação está rodando",
+app.get(
+  "/",
+  () => {
+    return { message: "Hello Elysia!" };
   },
-});
+  {
+    detail: {
+      tags: ["App"],
+      summary: "Hello Elysia",
+      description:
+        "Endpoint de teste para verificar se a aplicação está rodando",
+    },
+  }
+);
 
 app.use(routes);
 

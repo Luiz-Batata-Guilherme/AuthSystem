@@ -12,9 +12,17 @@ export const Register = new Elysia({
   },
 });
 
-Register.post("/register", "register", {
-  detail: {
-    summary: "Register",
-    description: "Endpoint para registro",
+Register.post(
+  "/register",
+  () => {
+    return {
+      message: "oi",
+    };
   },
-});
+  {
+    detail: {
+      summary: "Register",
+      description: "Endpoint para registro",
+    },
+  }
+);
