@@ -20,6 +20,14 @@ export const UserModel = {
     }),
     password: t.String({ description: "Senha do usuário", minLength: 8 }),
   }),
+  login: t.Object({
+    whatsapp: t.Number({
+      description: "Número do WhatsApp",
+      format: "phone",
+      minLength: 11,
+    }),
+    password: t.String({ description: "Senha do usuário", minLength: 8 }),
+  }),
   update: t.Object({
     name: t.String({ description: "Nome de usuário", minLength: 3 }),
     whatsapp: t.Number({
@@ -93,3 +101,4 @@ export const UserModelResponses = {
 export type UserCreate = typeof UserModel.create.static;
 export type UserUpdate = typeof UserModel.update.static;
 export type UserDelete = typeof UserModel.delete.static;
+export type UserLogin = typeof UserModel.login.static;

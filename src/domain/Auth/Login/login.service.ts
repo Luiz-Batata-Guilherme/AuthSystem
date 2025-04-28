@@ -1,5 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaService } from "@/lib/prisma";
+import { UserLogin } from "@/models/User/user.model";
 
-class LoginService {
-  private _prisma = new PrismaClient();
+export class LoginService {
+  constructor(private readonly prisma: typeof PrismaService) {}
+
+  async login(body: UserLogin) {}
 }
