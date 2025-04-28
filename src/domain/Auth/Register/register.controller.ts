@@ -3,7 +3,6 @@ import { UserModel, UserModelResponses } from "@/models/User/user.model";
 
 import { PrismaService } from "@/lib/prisma";
 import { RegisterService } from "./register.service";
-import { User } from "@prisma/client";
 
 export const RegisterController = new Elysia({ name: "RegisterController" });
 
