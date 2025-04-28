@@ -25,8 +25,19 @@ export const UserModel = {
       description: "Número do WhatsApp",
       format: "phone",
       minLength: 11,
+      examples: 11999999999,
+      default: 12345678900,
+      error: {
+        message: "Número de WhatsApp inválido",
+      },
     }),
-    password: t.String({ description: "Senha do usuário", minLength: 8 }),
+    password: t.String({
+      description: "Senha do usuário",
+      minLength: 8,
+      error: {
+        message: "Senha deve ter no mínimo 8 caracteres",
+      },
+    }),
   }),
   update: t.Object({
     name: t.String({ description: "Nome de usuário", minLength: 3 }),

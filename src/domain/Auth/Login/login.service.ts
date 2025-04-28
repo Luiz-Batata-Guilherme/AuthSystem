@@ -4,5 +4,18 @@ import { UserLogin } from "@/models/User/user.model";
 export class LoginService {
   constructor(private readonly prisma: typeof PrismaService) {}
 
-  async login(body: UserLogin) {}
+  async findUser(body: UserLogin) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        whatsapp: body.whatsapp,
+      },
+      select: {
+        id: true,
+        name: true,
+        whatsapp: true,
+        password: true,
+      },
+    });
+    return user;
+  }
 }

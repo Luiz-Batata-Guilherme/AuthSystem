@@ -1,4 +1,5 @@
 import Elysia from "elysia";
+import { LoginController } from "@/domain/Auth/Login/login.controller";
 import { RegisterController } from "@/domain/Auth/Register/register.controller";
 
 export const Auth = new Elysia({
@@ -25,3 +26,4 @@ Auth.get(
   }
 );
 Auth.use(RegisterController);
+Auth.use(LoginController);
