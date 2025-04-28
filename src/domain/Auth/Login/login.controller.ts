@@ -5,7 +5,6 @@ import {
 } from "@/config/constants";
 import { Elysia, error, t } from "elysia";
 
-import { Gender } from "@prisma/client";
 import { LoginService } from "./login.service";
 import { PrismaService } from "@/lib/prisma";
 import { UserModel } from "@/models/User/user.model";
