@@ -2,7 +2,7 @@ import Elysia from "elysia";
 import { JWT_NAME } from "../config/constants";
 import { User } from "@prisma/client";
 import jwt from "@elysiajs/jwt";
-import { prisma } from "../lib/prisma";
+import { PrismaService as prisma } from "../lib/prisma";
 
 const authPlugin = (app: Elysia) =>
   app

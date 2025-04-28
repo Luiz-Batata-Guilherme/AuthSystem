@@ -1,11 +1,11 @@
+import { UserCreate, UserDelete, UserUpdate } from "@/models/User/user.model";
+
 import { PrismaService } from "@/lib/prisma";
-import { RegisterDTO } from "@/models/User/register.dto";
-import { password } from "bun";
 
 export class RegisterService {
   constructor(private readonly prisma: typeof PrismaService) {}
 
-  async register(body: RegisterDTO) {
+  async register(body: UserCreate) {
     const password = await Bun.password.hash(body.password, {
       algorithm: "bcrypt",
       cost: 10,
@@ -19,7 +19,7 @@ export class RegisterService {
     return user;
   }
 
-  async update(id: string, body: RegisterDTO) {
+  async update(id: string, body: UserUpdate) {
     const user = await this.prisma.user.update({
       where: { id },
       data: {
@@ -29,9 +29,9 @@ export class RegisterService {
     return user;
   }
 
-  async delete(id: string) {
+  async delete(body: UserDelete) {
     await this.prisma.user.delete({
-      where: { id },
+      where: { id: body.id },
     });
   }
 }

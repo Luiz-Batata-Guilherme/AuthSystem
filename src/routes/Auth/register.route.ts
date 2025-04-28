@@ -1,28 +1,27 @@
 import Elysia from "elysia";
+import { RegisterController } from "@/domain/Auth/Register/register.controller";
 
-export const Register = new Elysia({
+export const Auth = new Elysia({
   prefix: "/auth",
   detail: {
     tags: ["Auth"],
-    security: [
-      {
-        bearerAuth: [],
-      },
-    ],
   },
 });
 
-Register.post(
-  "/register",
+Auth.get(
+  "/",
   () => {
     return {
-      message: "oi",
+      message: "Rota de Autenticação",
     };
   },
   {
     detail: {
-      summary: "Register",
-      description: "Endpoint para registro",
+      tags: ["Auth"],
+      summary: "Rota de autenticação",
+      description:
+        "Verifica de a rota de autenticação está funcionando corretamente",
     },
   }
 );
+Auth.use(RegisterController);

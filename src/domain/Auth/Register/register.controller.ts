@@ -1,29 +1,69 @@
+import { Elysia, error, t } from "elysia";
+import { UserModel, UserModelResponses } from "@/models/User/user.model";
+
+import { PrismaService } from "@/lib/prisma";
 import { RegisterService } from "./register.service";
+import { User } from "@prisma/client";
 
-export class RegisterController {
-  constructor(private readonly registerService: RegisterService) {}
+export const RegisterController = new Elysia({ name: "RegisterController" });
 
-  register() {
-    return {
-      message: "Register endpoint",
+RegisterController.post(
+  "/register",
+  async ({ body }) => {
+    const registerService = new RegisterService(PrismaService);
+    const user = await registerService.register(body);
+
+    const userFormatted = {
+      ...user,
+      whatsapp: Number(user.whatsapp),
     };
-  }
 
-  login() {
     return {
-      message: "Login endpoint",
+      message: "Usuário cadastrado com sucesso",
+      user: userFormatted,
     };
+  },
+  {
+    body: UserModel.create,
+    error: ({ code, set, body }) => {
+      if ((code as unknown) === "P2002") {
+        set.status = 409;
+        return {
+          message: `Whatsapp (${body.whatsapp}) já Cadastrado`,
+        };
+      }
+      if (code === "INTERNAL_SERVER_ERROR") {
+        set.status = 500;
+        return {
+          message: "Erro interno do servidor",
+        };
+      }
+    },
+    detail: {
+      tags: ["Auth"],
+      summary: "Cadastro de usuário",
+      description: "Registrar um novo usuário",
+    },
+    response: {
+      201: UserModelResponses.created,
+      409: t.String({
+        format: "error",
+        description: "Conflito de cadastro",
+        examples: [
+          {
+            message: "Whatsapp já cadastrado",
+          },
+        ],
+      }),
+      500: t.String({
+        format: "error",
+        description: "Erro interno do servidor",
+        examples: [
+          {
+            message: "Erro interno do servidor",
+          },
+        ],
+      }),
+    },
   }
-
-  update() {
-    return {
-      message: "Update endpoint",
-    };
-  }
-
-  delete() {
-    return {
-      message: "Delete endpoint",
-    };
-  }
-}
+);
