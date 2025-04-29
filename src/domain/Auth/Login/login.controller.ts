@@ -55,13 +55,15 @@ LoginController.post(
       path: "/",
     });
 
+    loginService.updateUserRefreshToken(user.id, refreshJWTToken);
+
     const userFormatted = {
       ...user,
       whatsapp: Number(user.whatsapp),
     };
 
     return {
-      message: "Login Efetuado com sucesso",
+      message: "Login efetuado com sucesso",
       data: {
         user: userFormatted,
         accessToken: accessJWTToken,

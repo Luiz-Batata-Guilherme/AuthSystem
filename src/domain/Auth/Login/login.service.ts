@@ -18,4 +18,16 @@ export class LoginService {
     });
     return user;
   }
+
+  async updateUserRefreshToken(id: string, refreshToken: string) {
+    const user = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        refreshToken,
+      },
+    });
+    return user;
+  }
 }
