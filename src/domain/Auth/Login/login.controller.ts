@@ -35,8 +35,9 @@ LoginController.post(
     const accessJWTToken = await jwt.sign({
       sub: user.id,
       exp: getExpTimestamp(ACCESS_TOKEN_EXP),
+      type: "access",
+      permissions: user.role,
     });
-
     accessToken.set({
       value: accessJWTToken,
       httpOnly: true,
@@ -47,6 +48,8 @@ LoginController.post(
     const refreshJWTToken = await jwt.sign({
       sub: user.id,
       exp: getExpTimestamp(REFRESH_TOKEN_EXP),
+      type: "refresh",
+      tokenVersion: Date.now(),
     });
     refreshToken.set({
       value: refreshJWTToken,

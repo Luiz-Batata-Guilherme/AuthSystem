@@ -1,4 +1,6 @@
-import { Gender } from "@prisma/client";
+import { Gender, Role } from "@prisma/client";
+
+import { convertToLocalDate } from "@/lib/utils";
 import { t } from "elysia";
 
 export const UserModel = {
@@ -110,6 +112,10 @@ export const UserModelResponses = {
   me: t.Object(
     {
       id: t.String({ description: "Id do usuário", format: "uuid" }),
+      role: t.Enum(Role, {
+        description: "Cargo",
+        default: "USER",
+      }),
       name: t.String({ description: "Nome do usuário", default: "John Doe" }),
       gender: t.Enum(Gender, {
         description: "Genero do usuário",
@@ -118,6 +124,14 @@ export const UserModelResponses = {
       whatsapp: t.Number({
         description: "Whatsapp do usuário",
         default: "12345678900",
+      }),
+      createdAt: t.String({
+        description: "Data de criação do usuário",
+        default: convertToLocalDate(new Date(2025, 0, 1)),
+      }),
+      updatedAt: t.String({
+        description: "Data de atualização do usuário",
+        default: convertToLocalDate(new Date(2025, 0, 1)),
       }),
     },
     {

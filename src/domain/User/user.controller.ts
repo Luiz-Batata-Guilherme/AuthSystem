@@ -17,6 +17,11 @@ UserController.get(
       summary: "Informações do usuário",
       description: "Pega as informações do usuário",
       tags: ["User"],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
     },
     response: {
       200: UserModelResponses.me,

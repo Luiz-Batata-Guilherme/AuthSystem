@@ -6,4 +6,10 @@ function getExpTimestamp(seconds: number) {
   return Math.floor(expirationTimeMillis / 1000);
 }
 
-export { getExpTimestamp };
+const convertToLocalDate = (utcDate: Date | string) => {
+  return new Date(utcDate).toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+  });
+};
+
+export { getExpTimestamp, convertToLocalDate };

@@ -11,6 +11,7 @@ export class LoginService {
       },
       select: {
         id: true,
+        role: true,
         name: true,
         whatsapp: true,
         password: true,

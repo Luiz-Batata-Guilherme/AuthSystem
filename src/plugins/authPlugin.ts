@@ -1,6 +1,7 @@
 import Elysia, { error } from "elysia";
 
 import { JWT_NAME } from "../config/constants";
+import { convertToLocalDate } from "@/lib/utils";
 import jwt from "@elysiajs/jwt";
 import { PrismaService as prisma } from "../lib/prisma";
 
@@ -17,7 +18,7 @@ const authPlugin = (app: Elysia) =>
         // handle error for access token is not available
         set.status = "Unauthorized";
         throw error("Unauthorized", {
-          message: "Access token is missing",
+          message: "Acesso não autorizado",
         });
       }
       const jwtPayload = await jwt.verify(accessToken.value);
@@ -25,7 +26,7 @@ const authPlugin = (app: Elysia) =>
         // handle error for access token is tempted or incorrect
         set.status = "Forbidden";
         throw error("Forbidden", {
-          message: "Access token is invalid",
+          message: "Token de acesso é inválido",
         });
       }
 
@@ -40,15 +41,18 @@ const authPlugin = (app: Elysia) =>
         // handle error for user not found from the provided access token
         set.status = "Forbidden";
         throw error("Forbidden", {
-          message: "Access token is invalid",
+          message: "Token de acesso é inválido",
         });
       }
 
       const UserFormated = {
         id: user.id,
+        role: user.role,
         name: user.name,
         gender: user.gender,
         whatsapp: Number(user.whatsapp),
+        createdAt: convertToLocalDate(user.createdAt),
+        updatedAt: convertToLocalDate(user.updatedAt),
       };
 
       return {
