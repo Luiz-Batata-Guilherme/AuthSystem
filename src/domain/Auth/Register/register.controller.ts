@@ -1,4 +1,4 @@
-import { Elysia, error, t } from "elysia";
+import { Elysia, t } from "elysia";
 import { UserModel, UserModelResponses } from "@/models/User/user.model";
 
 import { PrismaService } from "@/lib/prisma";

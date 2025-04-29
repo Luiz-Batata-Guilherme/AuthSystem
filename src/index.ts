@@ -16,8 +16,9 @@ app.use(
           "Esta é a documentação da API para a aplicação de agendamentos. Feito em Elysia.",
       },
       tags: [
-        { name: "App", description: "Endpoints da aplicação" },
-        { name: "Auth", description: "Endpoints de autenticação" },
+        { name: "App", description: "Endpoints da Aplicação" },
+        { name: "Auth", description: "Endpoints de Autenticação" },
+        { name: "User", description: "Endpoints do Usuário" },
       ],
       components: {
         securitySchemes: {

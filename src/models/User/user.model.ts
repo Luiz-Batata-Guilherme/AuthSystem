@@ -92,7 +92,7 @@ export const UserModelResponses = {
           id: "123e4567-e89b-12d3-a456-426614174000",
           name: "string",
           gender: "MALE",
-          whatsapp: 0,
+          whatsapp: "12345678900",
         },
       },
     }
@@ -107,6 +107,23 @@ export const UserModelResponses = {
       name: t.String(),
     }),
   }),
+  me: t.Object(
+    {
+      id: t.String({ description: "Id do usuário", format: "uuid" }),
+      name: t.String({ description: "Nome do usuário", default: "John Doe" }),
+      gender: t.Enum(Gender, {
+        description: "Genero do usuário",
+        default: "MALE",
+      }),
+      whatsapp: t.Number({
+        description: "Whatsapp do usuário",
+        default: "12345678900",
+      }),
+    },
+    {
+      description: "Retorna os dados do usuário",
+    }
+  ),
 };
 
 export type UserCreate = typeof UserModel.create.static;
