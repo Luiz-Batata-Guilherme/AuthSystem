@@ -20,7 +20,13 @@ export const UserModel = {
       minLength: 11,
       default: 12345678900,
     }),
-    password: t.String({ description: "Senha do usuário", minLength: 8 }),
+    password: t.String({
+      description: "Senha do usuário",
+      minLength: 8,
+      error: {
+        message: "Senha deve ter no mínimo 8 caracteres",
+      },
+    }),
   }),
   login: t.Object({
     whatsapp: t.Number({

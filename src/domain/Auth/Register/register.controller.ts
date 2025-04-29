@@ -54,6 +54,15 @@ RegisterController.post(
           },
         ],
       }),
+      422: t.String({
+        format: "error",
+        description: "Erro de validação",
+        examples: [
+          {
+            message: "Senha deve ter no mínimo 8 caracteres",
+          },
+        ],
+      }),
       500: t.String({
         format: "error",
         description: "Erro interno do servidor",
