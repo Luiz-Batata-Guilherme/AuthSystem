@@ -6,14 +6,14 @@ export const app = new Elysia().listen(3000);
 
 app.use(
   swagger({
-    path: "/api/v1/docs",
+    path: "/swagger",
     autoDarkMode: true,
     documentation: {
       info: {
-        title: "Api de Agendamentos",
+        title: "Auth System",
         version: "1.0.0",
         description:
-          "Esta é a documentação da API para a aplicação de agendamentos. Feito em Elysia.",
+          "Esta é a documentação da API de autenticação, feito para um projeto de agendamentos, mas pode ser utilizada para outros projetos. Feito em Elysia.",
       },
       tags: [
         { name: "App", description: "Endpoints da Aplicação" },
